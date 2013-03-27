@@ -12,6 +12,7 @@ app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   //...truncate...//
   app.use(cookieParser);
+  //make sure to use the same secret as you specified in your cookieParser
   app.use(express.session({secret: 'secret', store: sessionStore}));
   app.use(app.router);
 });
