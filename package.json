@@ -1,0 +1,18 @@
+{
+  "name": "session.io",
+  "version": "1.0.0",
+  "description": "Gets session data for socket.io",
+  "main": "session.io.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:AustP/session.io.git"
+  },
+  "keywords": [
+    "socket.io",
+    "sessions",
+    "session",
+    "data"
+  ],
+  "author": "AustP",
+  "license": "MIT"
+}
