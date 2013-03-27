@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Gets session data for socket.io",
   "main": "session.io.js",
+  "scripts": [
+    "test": "examples/test.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:AustP/session.io.git"
