@@ -1,14 +1,23 @@
-module.exports = function(handshake, done, cookieParser, sessionStore, key){
-	key = key || 'connect.sid';
-	cookieParser(handshake, {}, function(err){
-		if(err) done(err, false);
-		var cookie = (handshake.secureCookies && handshake.secureCookies[key])
-			|| (handshake.signedCookies && handshake.signedCookies[key])
-			|| (handshake.cookies && handshake.cookies[key]);
-		sessionStore.load(cookie, function(err, session){
-		if(err) done(err, false);
-			handshake.session = session;
-			done(null, true);
-		});
-	});	
+module.exports = function(cookieParser, sessionStore, key, fn){
+	fn = (typeof key === 'string')? fn: key;
+	key = (typeof key === 'string')? key: 'connect.sid';
+
+	return function(handshake, done){
+		function next(err, bool){
+			fn? fn(handshake, done): done(err, bool);
+		}
+
+		if(!handshake || !handshake.headers || !handshake.headers.cookie) next('No cookie', false);
+		cookieParser(handshake, {}, function(err){
+			if(err) next(err, false);
+			var session_id = (handshake.secureCookies && handshake.secureCookies[key])
+				|| (handshake.signedCookies && handshake.signedCookies[key])
+				|| (handshake.cookies && handshake.cookies[key]);
+			sessionStore.load(session_id, function(err, session){
+			if(err) next(err, false);
+				handshake.session = session;
+				next(null, true);
+			});
+		});	
+	}
 }
