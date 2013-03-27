@@ -4,7 +4,7 @@
   "description": "Gets session data for socket.io",
   "main": "session.io.js",
   "scripts": [
-    "test": "examples/test.js"
+    {"test": "examples/test.js"}
   ],
   "repository": {
     "type": "git",
