@@ -28,7 +28,7 @@ Using `session.io` is as easy as adding a few lines of code:
     var sessionStore = require('sessionstore').createSessionStore();
     //...truncate...//
     app.use(cookieParser);
-    app.use(express.session({secret: 'secret'], store: sessionStore}));
+    app.use(express.session({secret: 'secret', store: sessionStore}));
     //...truncate...//
     io.set('authorization', require('session.io')(cookieParser, sessionStore));
       
