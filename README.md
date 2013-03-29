@@ -22,8 +22,18 @@ and saw some things that I liked in it and adapted it to my code (i.e. allowing 
     npm install session.io
     
 ###Setup
-This script is under <a href="https://github.com/AustP/session.io/blob/master/examples/test.js">/examples/test.js</a>
-if you want to test it.
+Using `session.io` is as easy as adding a few lines of code:
+
+    var cookieParser = express.cookieParser('secret');
+    var sessionStore = require('sessionstore').createSessionStore();
+    //...truncate...//
+    app.use(cookieParser);
+    app.use(express.session({secret: 'secret'], store: sessionStore}));
+    //...truncate...//
+    io.set('authorization', require('session.io')(cookieParser, sessionStore));
+      
+To understand the context of where you should add those lines, here is a full `app.js` script. This script is under 
+<a href="https://github.com/AustP/session.io/blob/master/examples/test.js">/examples/test.js</a> if you want to test it.
 
     var express = require('express');
     var app = express();
