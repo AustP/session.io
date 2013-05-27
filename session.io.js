@@ -17,7 +17,7 @@ module.exports = function(cookieParser, sessionStore, key, fn){
 			if(!session_id) next('Could not find cookie with key: ' + key, false);
 			
 			sessionStore.load(session_id, function(err, session){
-				if(err) next(err, false);
+				if(!session || err) next(err, false);
 				handshake.session = session;
 				next(null, true);
 			});
